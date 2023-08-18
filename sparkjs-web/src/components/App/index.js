@@ -1,19 +1,39 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Switch, Link, useLocation } from 'react-router-dom';
 import PageLayout from '../../containers/PageLayout';
 
 import { StaticRouter } from "react-router-dom/server";
 import styles from './styles.scss';
 
-const Home = () => (
-  <div>      
-    <ul>
-      <li><Link to={`/home`}>HOME</Link></li>
-      <li><Link to={`/about`}>ABOUT</Link></li>
-    </ul>
-    <h1>Home</h1>
-  </div>
-);
+
+
+const Main = (props) => {
+  const location = useLocation();
+  console.log("Main: ", location.pathname);
+
+  switch(location.pathname) {
+    case '/home':
+      return <Home/>;
+      break;
+    case '/about':
+      return <About/>
+      break;
+
+  }
+}
+
+const Home = (props) => {
+  console.log(props);
+  return (
+    <div>      
+      <ul>
+        <li><Link to={`/home`}>HOME</Link></li>
+        <li><Link to={`/about`}>ABOUT</Link></li>
+      </ul>
+      <h1>Home</h1>
+    </div>
+  );
+}
 
 const About = () => (
   <div>      
@@ -34,15 +54,15 @@ const client = () => {
 
   //console.log(">>>>> [CLIENT] ", window.location.pathname);
   const props = {
-    originalUrl: window.location.pathname
+    originalUrl: window.location
   }
     
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/test" element={<PageLayout {...props} />} />
-        <Route path="/home" element={<Home {...props} />} />
-        <Route path="/About" element={<About {...props} />} />
+        <Route path="/home" element={<Main {...props} />} />
+        <Route path="/About" element={<Main {...props} />} />
       </Routes>        
     </BrowserRouter>      
   );

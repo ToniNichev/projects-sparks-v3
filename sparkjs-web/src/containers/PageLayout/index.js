@@ -15,7 +15,7 @@ class PageLayout extends Component {
   
     render() {      
       let url = this.props.originalUrl;  
-      console.log(">>>>>>>>> ", url);
+      console.log(">>>>>>>>> PageLayout: ", url);
 
       if(typeof window === 'undefined') {
         // server side 

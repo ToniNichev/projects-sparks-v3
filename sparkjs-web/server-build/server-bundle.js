@@ -26,7 +26,20 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 
 
 
-var Home = function Home() {
+var Main = function Main(props) {
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
+  console.log("Main: ", location.pathname);
+  switch (location.pathname) {
+    case '/home':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Home, null);
+      break;
+    case '/about':
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(About, null);
+      break;
+  }
+};
+var Home = function Home(props) {
+  console.log(props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/home"
   }, "HOME")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
@@ -47,17 +60,17 @@ var client = function client() {
 
   //console.log(">>>>> [CLIENT] ", window.location.pathname);
   var props = {
-    originalUrl: window.location.pathname
+    originalUrl: window.location
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/test",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_containers_PageLayout__WEBPACK_IMPORTED_MODULE_2__["default"], props)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/home",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Home, props)
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Main, props)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/About",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(About, props)
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Main, props)
   })));
 };
 var server = function server(props) {
@@ -437,7 +450,7 @@ var PageLayout = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
       var url = this.props.originalUrl;
-      console.log(">>>>>>>>> ", url);
+      console.log(">>>>>>>>> PageLayout: ", url);
       if (typeof window === 'undefined') {
         // server side 
       } else {
