@@ -52,9 +52,7 @@ const client = () => {
   const cookies = {};
   const apiData = {};
 
-  //console.log(">>>>> [CLIENT] ", window.location.pathname);
-  const props = {
-    originalUrl: window.location
+  const props = {    
   }
     
   return (
