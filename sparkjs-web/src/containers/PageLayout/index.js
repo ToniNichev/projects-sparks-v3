@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import ComponentList from './ComponentList';
 import PageData from './PageData';
 import Cookies from 'universal-cookie';
@@ -14,7 +14,8 @@ class PageLayout extends Component {
     } 
   
     render() {      
-      let url = this.props.location.pathname;  
+      let url = this.props.originalUrl;  
+      console.log(">>>>>>>>> ", url);
 
       if(typeof window === 'undefined') {
         // server side 
@@ -45,7 +46,9 @@ class PageLayout extends Component {
           }
           return (
               <div style={style} data-main="true" key={componentName} props={props}>
-                <ChildComponent/>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ChildComponent/>
+                </Suspense>
               </div>
           );
         });

@@ -63,7 +63,6 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')()],
               sourceMap: true              
             },
           },
@@ -75,6 +74,7 @@ module.exports = {
           }
         ],
       },
+
       // images
       {
         test: /\.(png|jp(e*)g|svg)$/,  
