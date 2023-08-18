@@ -43,17 +43,17 @@ console.log("SERVER_PORT: ", SERVER_PORT);
 
 function responseWithSourceCode(req, res, apiData, templateName) {
 
-  const Html = templateList[req.template];
+  const Html = templateList[templateName];
+
+  
   const HTML_content = ReactDOMServer.renderToString(<App req={req} />);
+
+
   const cssBundles = [];
   const jsBundles = [];
   const html = <Html content={HTML_content} cssBundles={cssBundles} jsBundles={jsBundles} apiData={apiData}/>;
   res.status(200);
   res.send(`<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(html)}`);
-
-  //res.send(`<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(HTML_content)}`);
-
-  //res.send(`TEST 123`);
   res.end();
 }
 
@@ -70,9 +70,9 @@ app.get('/Robots.txt', (req, res) => {
 // #############################################################
 app.get('/*', 
   function (req, res, next) {
-    console.log("Serving main file ...s");
+    console.log("Request to: ", req.url);
     const apiData = [];
-    const templateName = 'html';
+    const templateName = 'Html';
     responseWithSourceCode(req, res, apiData, templateName);
 });
 
