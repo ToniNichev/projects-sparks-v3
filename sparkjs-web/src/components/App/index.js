@@ -60,7 +60,7 @@ const client = () => {
   return (
     <BrowserRouter>
       <Routes>      
-        <Route path="/*" element={<Main {...props} />} />        
+        <Route path="/*" element={<PageLayout {...props} />} />        
       </Routes>        
     </BrowserRouter>      
   );

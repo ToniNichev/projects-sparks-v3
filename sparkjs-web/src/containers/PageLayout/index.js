@@ -14,7 +14,11 @@ class PageLayout extends Component {
     } 
   
     render() {      
-      let url = this.props.originalUrl;  
+      
+      const location = useLocation();
+      console.log("Main: ", location.pathname);
+
+      let url = this.props.originalUrl ?  this.props.originalUrl : location.pathname;
       console.log(">>>>>>>>> PageLayout: ", url);
 
       if(typeof window === 'undefined') {
