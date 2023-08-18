@@ -58,10 +58,10 @@ export default {
             }
           },
           {
-            name: "LeftRail",
+            name: "RightRail",
             props: {},
             style: {
-              width: '20%'
+              width: '50%'
             }            
           },          
         ] 

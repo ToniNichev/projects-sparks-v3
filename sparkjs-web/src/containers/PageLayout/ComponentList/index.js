@@ -10,9 +10,14 @@ const Home = lazy(() => import('../../../components/Home'));
 
 const About = lazy(() => import('../../../pageComponents/About'));
 
+const Words = lazy(() => import('../../../pageComponents/Words'));
+
+const RightRail = lazy(() => import('../../../pageComponents/RightRail'));
 
 export default {
   Home,
   Header,
   About,
+  Words,
+  RightRail,
 }
