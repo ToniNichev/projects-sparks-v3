@@ -11,8 +11,7 @@ const PageLayout = (props) => {
   const location = useLocation();
   console.log("Main: ", location.pathname);
 
-  let url = props.originalUrl ?  props.originalUrl : location.pathname;
-  console.log(">>>>>>>>> PageLayout: ", url);
+  let url = props.originalUrl ?  props.originalUrl : location.pathname; 
 
   if(typeof window === 'undefined') {
     // server side 

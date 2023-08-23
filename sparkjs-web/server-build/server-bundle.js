@@ -399,7 +399,6 @@ var PageLayout = function PageLayout(props) {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
   console.log("Main: ", location.pathname);
   var url = props.originalUrl ? props.originalUrl : location.pathname;
-  console.log(">>>>>>>>> PageLayout: ", url);
   if (typeof window === 'undefined') {
     // server side 
   } else {

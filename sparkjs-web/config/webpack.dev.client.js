@@ -86,10 +86,11 @@ module.exports = {
             } 
         }]
       },
-      //File loader used to load fonts
+      // Fonts loader
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        type: 'asset/resource',
+        dependency: { not: ['url'] },
       }                    
     ]
   },
