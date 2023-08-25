@@ -1,0 +1,26 @@
+{
+  "name": "sparkql",
+  "version": "1.0.0",
+  "description": "Sparql Graphql server",
+  "main": "index.js",
+  "repository": "https://github.com/ToniNichev/projects-spark-js-v2",
+  "author": "Toni Y Nichev",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.9.1",
+    "express": "^4.18.2",
+    "graphql": "^16.8.0",
+    "mongodb": "^5.7.0"
+  },
+  "scripts": {
+    "start-dev": "nodemon babel-node index.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/node": "^7.22.10",
+    "babel-node": "^0.0.1-security",
+    "nodemon": "^3.0.1"
+  }
+}
