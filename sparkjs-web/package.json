@@ -13,7 +13,8 @@
 
     "build-prod": "NODE_ENV=production webpack --config ./config/webpack.prod.client.js",
     "build-prod-ssr": "NODE_ENV=production webpack --config ./config/webpack.prod.ssr.server.js",
-    "run-prod-server": "node ./server-build/server-bundle.js"
+    "run-prod-server": "node ./server-build/server-bundle.js",
+    "start-prod": "yarn clean; yarn build-prod; yarn build-prod-ssr; yarn run-prod-server"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",

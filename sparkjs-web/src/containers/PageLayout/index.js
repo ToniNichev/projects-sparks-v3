@@ -18,10 +18,13 @@ const PageLayout = (props) => {
 
   } else {
     // client side       
-    window.__API_DATA__.url = url;
   }
-  const page = PageData[url];
-  const template = page.template || "template-not-found";
+
+
+
+  const pageName = PageData[url] ?  url : "/not-found";
+  const page = PageData[pageName];
+  const template = page?.template || "template-not-found";
 
   
 

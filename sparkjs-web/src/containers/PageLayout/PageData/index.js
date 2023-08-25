@@ -127,5 +127,19 @@ export default {
         ] 
       },        
     ]
-}    
+  },
+  '/not-found' : {
+    template: "OtherHtml",      
+    layout: [ 
+      {
+        span: 12,
+        components:[
+          {
+            name: "NotFound",
+            props: {}
+          }
+        ] 
+      },        
+    ]
+  },  
 }
