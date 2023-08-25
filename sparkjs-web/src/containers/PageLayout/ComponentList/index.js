@@ -6,7 +6,7 @@ import React, { lazy } from 'react';
 /* Components */
 const Header = lazy(() => import('../../../pageComponents/Header'));
 
-const Home = lazy(() => import('../../../components/Home'));
+const Home = lazy(() => import('../../../pageComponents/Home'));
 
 const About = lazy(() => import('../../../pageComponents/About'));
 

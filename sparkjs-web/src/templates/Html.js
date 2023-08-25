@@ -13,29 +13,6 @@ const Html = ({ content, cssBundles, jsBundles, apiData }) => (
     </script>
     <title>Server Side Rendering and Bundle Splitting</title>
 
-    { // don't add this to DEV since there, it will be served from Webpack-dev-server
-      process.env.ENVIRONMENT !== 'development' && (
-      <link
-        href={`${publicPath}main.css`}
-        rel="stylesheet"
-        as="style"
-        media="screen, projection"
-        type="text/css"
-        charSet="UTF-8"
-      />)
-    }
-    {
-      cssBundles.map( (bundle) => 
-        (<link
-          href={`${bundle.publicPath}`}
-          rel="stylesheet"
-          as="style"
-          media="screen, projection"
-          type="text/css"
-          charSet="UTF-8"
-        />))
-    }
-
     {jsBundles.map( ( {file}) => (<script src={`${publicPath}${file}`}>{file}</script>) )}
 
     <script dangerouslySetInnerHTML={{
