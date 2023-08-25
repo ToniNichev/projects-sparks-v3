@@ -5,30 +5,24 @@ const path = require('path');
 
 const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 
-const projectRootPath = path.resolve(__dirname, '../');
+// const projectRootPath = path.resolve(__dirname, '../');
 
+console.log(`Assets will be served from: ${process.env.APP_HOST} ${process.env.ASSETS_SERVER_PORT}`);
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: 'production',
+  
+  // devtool: 'source-map',
+
   entry: [
     './src/index.js',
-  ],
-
-  devServer: {
-    host: '0.0.0.0',
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    static: {
-      directory: './src',
-    },    
-    hot: true,
-    port: process.env.ASSETS_SERVER_PORT,
-    // noInfo: true,
-  },  
+  ], 
 
   output: {
     filename: '[name]-bundle.js',
-    publicPath,
+    sourceMapFilename: 'source-maps/[name].js.map',
+    //publicPath,
+    publicPath: '/dist/',
   },  
 
   module: {

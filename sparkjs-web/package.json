@@ -9,7 +9,11 @@
     "clean": "rm -rf ./dist ./server-build",
     "build-dev": "webpack-dev-server --config ./config/webpack.dev.client.js",
     "build-dev-ssr": "webpack --config ./config/webpack.dev.ssr.server.js --watch",
-    "start-dev": "yarn clean; yarn build-dev & yarn build-dev-ssr"
+    "start-dev": "yarn clean; yarn build-dev & yarn build-dev-ssr",
+
+    "build-prod": "NODE_ENV=production webpack --config ./config/webpack.prod.client.js",
+    "build-prod-ssr": "NODE_ENV=production webpack --config ./config/webpack.prod.ssr.server.js",
+    "run-prod-server": "node ./server-build/server-bundle.js"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",

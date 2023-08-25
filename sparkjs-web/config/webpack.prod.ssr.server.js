@@ -1,36 +1,23 @@
-const getEnvironmentConstants = require('../getEnvironmentConstants');
-const webpack = require('webpack');
-// const Loadable  = require('react-loadable/webpack');
 const path = require('path');
-
-const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
-
-const projectRootPath = path.resolve(__dirname, '../');
-
+const nodeExternals = require('webpack-node-externals');
+const webpack =require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const getEnvironmentConstants = require('../getEnvironmentConstants');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
-  entry: [
-    './src/index.js',
-  ],
+  mode: 'production',
+  target: "node",
+  externals: [nodeExternals()],
 
-  devServer: {
-    host: '0.0.0.0',
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    static: {
-      directory: './src',
-    },    
-    hot: true,
-    port: process.env.ASSETS_SERVER_PORT,
-    // noInfo: true,
-  },  
+  entry: {
+    server: './ssr-server.js'
+  },
 
   output: {
     filename: '[name]-bundle.js',
-    publicPath,
+    path: path.resolve(__dirname, '../', 'server-build') 
   },  
-
+  
   module: {
     rules: [
       {
@@ -45,7 +32,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -59,6 +46,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
+              postcssOptions: {
+                plugins: () => [require('autoprefixer')()],
+              },
               sourceMap: true              
             },
           },
@@ -66,11 +56,10 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-            },             
+            },            
           }
         ],
       },
-
       // images
       {
         test: /\.(png|jp(e*)g|svg)$/,  
@@ -82,18 +71,21 @@ module.exports = {
             } 
         }]
       },
-      // Fonts loader
+      //File loader used to load fonts
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'asset/resource',
-        dependency: { not: ['url'] },
+        use: ['file-loader']
       }                    
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env' : getEnvironmentConstants() } ),  
+    new MiniCssExtractPlugin({}),  
 
-    // hot reload
-    new webpack.HotModuleReplacementPlugin() 
+    // on the server we still need one bundle
+    new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1
+    }),    
+
+    new webpack.DefinePlugin({ 'process.env' : getEnvironmentConstants() } ),     
   ]
 };

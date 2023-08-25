@@ -12,7 +12,7 @@ import templateList from './src/templates/TemplateList';
 import cookieParser from 'cookie-parser';
 //import cookiesManagement from './expressMiddlewares/cookiesManagement';
 // import requestDataFromAPI from './expressMiddlewares/requestDataFromAPI';
-const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
+// const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 // import pageData from './expressMiddlewares/pageData';
 //import devicesServices from './expressMiddlewares/devicesServices';
 //import userServices from './expressMiddlewares/userServices';
@@ -25,7 +25,7 @@ const {APP_HOST, SERVER_PORT, ENVIRONMENT} = process.env;
 let test = null;
 
 
-const app = new express();
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({xtended: true}));
@@ -34,11 +34,11 @@ app.use(express.text())
 app.use(bodyParser.text({ type: 'text/*' }));
 
 app.use(cookieParser());
-app.use('/source-maps', express.static('./dist/source-maps'));
-app.use('/server-build', express.static('./server-build'));
+// app.use('/source-maps', express.static('./dist/source-maps'));
+// app.use('/server-build', express.static('./server-build'));
 app.use('/dist', express.static('dist')); // to serve frontent prod static files
 app.use('/favicon.ico', express.static('./static-assets/favicon.ico'));
-app.use(express.static('static-assets'));
+//app.use(express.static('static-assets'));
 console.log("SERVER_PORT: ", SERVER_PORT);
 
 function responseWithSourceCode(req, res, apiData, templateName) {
