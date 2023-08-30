@@ -14,7 +14,7 @@ const connect = async () => {
   let db = null;
   try {
     const client = await MongoClient.connect(url);
-    db = client.db(dbName);  
+    db = client.db(dbName);      
   } 
   catch (err) {
     console.log("Error connectiong to Mongo DB!");
@@ -30,6 +30,7 @@ export default {
 
     try  {
       const db = await connect();
+      console.log("Connected to MongoDB : ", db);
       result = await db.collection(collectionName).insert(docObject);
       return result;
     }
