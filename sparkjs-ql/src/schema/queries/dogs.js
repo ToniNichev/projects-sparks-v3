@@ -1,11 +1,11 @@
 import graphql from 'graphql';
-import DogType from '../types/dogs.js';
+import AllTypes from '../types/index.js';
 import mongoDB from '../../connectors/database/mongodb.js';
 
 
 const Dogs = {
   getDogByBreed: {
-    type: DogType,
+    type: AllTypes.Dog,
     args: {
       breed: { type: graphql.GraphQLString }
     },
@@ -14,17 +14,15 @@ const Dogs = {
       return result[0];
     }
   },
-  /*
   getAllDogs: {
-    type: AllDogsType,
+    type: new graphql.GraphQLList(AllTypes.Dog),
     args: {
     },
     resolve: async (_) => {
       const result = await mongoDB.find({}, 'dogs');
       return result;
     }
-  } 
-  */   
+  }    
 }
 
 

@@ -1,5 +1,6 @@
 import graphql from 'graphql';
 
+
 export default new graphql.GraphQLObjectType({
   name: 'Dog',
   fields: {
