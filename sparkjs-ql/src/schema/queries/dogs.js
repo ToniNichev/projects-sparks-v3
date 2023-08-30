@@ -15,7 +15,7 @@ const Dogs = {
     }
   },
   getAllDogs: {
-    type: new graphql.GraphQLList(AllTypes.Dog),
+    type: AllTypes.Dogs,
     args: {
     },
     resolve: async (_) => {

@@ -1,17 +1,9 @@
 import  Dog from './dogs.js';
 import graphql from 'graphql';
 
-/*
-const Dogs = new graphql.GraphQLObjectType({
-  name: 'Dog',
-  fields: {
-    id: { type: graphql.GraphQLString },
-    breed: { type: graphql.GraphQLString },
-    displayImage: { type: graphql.GraphQLString },
-  }
-});
-*/
+const Dogs = new graphql.GraphQLList(Dog);
 
 export default {
   Dog,
+  Dogs,
 };
