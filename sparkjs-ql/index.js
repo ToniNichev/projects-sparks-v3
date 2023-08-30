@@ -12,21 +12,6 @@ dotenv.config();
 
 const app = express();
 
-
-// Construct a schema, using GraphQL schema language
-const typeDefs = `
-  type Query {
-    hello: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!!!!',
-  },
-};
-
 const server = new ApolloServer({
   schema: schema,
   graphiql: true,
@@ -39,7 +24,7 @@ await server.start();
 app.use('/graphql', cors(),  json(), expressMiddleware(server));
 
 // #############################################################
-//  setup services
+//  setup service
 // #############################################################
 app.use('/services/setup', async (req, res) => {
   queries.setup();

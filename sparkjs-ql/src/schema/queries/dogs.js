@@ -13,7 +13,18 @@ const Dogs = {
       const result = await mongoDB.find({breed: breed}, 'dogs');
       return result[0];
     }
-  }   
+  },
+  /*
+  getAllDogs: {
+    type: AllDogsType,
+    args: {
+    },
+    resolve: async (_) => {
+      const result = await mongoDB.find({}, 'dogs');
+      return result;
+    }
+  } 
+  */   
 }
 
 
