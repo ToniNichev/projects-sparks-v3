@@ -9,29 +9,9 @@ const Dogs = {
     args: {
       breed: { type: graphql.GraphQLString }
     },
-    resolve: function (_, {breed}) {
-
-      console.log("part one !!!!");
-
-        mongoDB.find({breed: breed}, 'Dogs', function(err, result) {
-          if(err) {
-            console.log("ERROR !", err);
-            reject(err);
-          }
-          else {
-            console.log("RESOLVED !!!!");
-            resolve(result[0]);
-          }
-        });
-      
-
-      const result = {
-        id: '123',
-        breed: 'Labrador',
-        displayImage: 'https://some-image.com',
-        test: '12344444'
-      }
-      return result;
+    resolve: async (_, {breed}) => {
+      const result = await mongoDB.find({breed: breed}, 'dogs');
+      return result[0];
     }
   }   
 }

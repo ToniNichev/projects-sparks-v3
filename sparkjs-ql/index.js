@@ -6,11 +6,9 @@ import dotenv from 'dotenv';
 import express from 'express';
 // import fs from 'fs';
 import schema  from './src/schema/index.js';
-
-
+import queries from './src/queries/index.js';
 dotenv.config();
 
-//console.log(">>>>>>>>>>>>>>>", process.env);
 
 const app = express();
 
@@ -39,6 +37,20 @@ await server.start();
 
 // Specify the path where we'd like to mount our server
 app.use('/graphql', cors(),  json(), expressMiddleware(server));
+
+// #############################################################
+//  setup services
+// #############################################################
+app.use('/services/setup', async (req, res) => {
+  queries.setup();
+
+  res
+  .status(200)
+  .set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', '*')
+  .set('Access-Control-Allow-Headers', '*')
+  .send('{"status": "sucess"}');  
+});
 
 app.listen(4001);
 console.log('Running a GraphQL API server at localhost:4001/graphql');

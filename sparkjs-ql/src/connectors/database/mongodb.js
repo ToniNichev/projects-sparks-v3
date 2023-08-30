@@ -30,8 +30,10 @@ export default {
 
     try  {
       const db = await connect();
-      console.log("Connected to MongoDB : ", db);
-      result = await db.collection(collectionName).insert(docObject);
+      if(docObject.length === 1)
+        result = await db.collection(collectionName).insertOne(docObject);
+      else
+        result = await db.collection(collectionName).insertMany(docObject);
       return result;
     }
     catch (err) {

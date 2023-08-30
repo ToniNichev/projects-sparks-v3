@@ -6,7 +6,6 @@ export default new graphql.GraphQLObjectType({
     id: { type: graphql.GraphQLString },
     breed: { type: graphql.GraphQLString },
     displayImage: { type: graphql.GraphQLString },
-    test: { type: graphql.GraphQLString }
   }
 });
 
