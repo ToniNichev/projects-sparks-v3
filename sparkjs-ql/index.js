@@ -2,10 +2,18 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
 import json from 'body-parser';
+import dotenv from 'dotenv';
 import express from 'express';
+// import fs from 'fs';
 import schema  from './src/schema/index.js';
 
+
+dotenv.config();
+
+//console.log(">>>>>>>>>>>>>>>", process.env);
+
 const app = express();
+
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = `

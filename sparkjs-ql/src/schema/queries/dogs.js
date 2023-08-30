@@ -1,13 +1,30 @@
 import graphql from 'graphql';
-import dogType from '../types/dogs.js';
+import DogType from '../types/dogs.js';
+import mongoDB from '../../connectors/database/mongodb.js';
+
 
 const Dogs = {
   getDogByBreed: {
-    type: dogType,
+    type: DogType,
     args: {
       breed: { type: graphql.GraphQLString }
     },
     resolve: function (_, {breed}) {
+
+      console.log("part one !!!!");
+
+        mongoDB.find({breed: breed}, 'Dogs', function(err, result) {
+          if(err) {
+            console.log("ERROR !", err);
+            reject(err);
+          }
+          else {
+            console.log("RESOLVED !!!!");
+            resolve(result[0]);
+          }
+        });
+      
+
       const result = {
         id: '123',
         breed: 'Labrador',
@@ -18,6 +35,7 @@ const Dogs = {
     }
   }   
 }
+
 
 export default Dogs;
 

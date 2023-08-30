@@ -1,6 +1,6 @@
-import graphql from 'graphql');
+import graphql from 'graphql';
 // const DogType = require('../types/dogs');
-const mongoDB = require('../../connectors/database/mongodb');
+import mongoDB from '../../connectors/database/mongodb.js';
     
 export default {
     addDog: {
@@ -11,6 +11,7 @@ export default {
         displayImage: { type: graphql.GraphQLString },
       },
       resolve: function (_, {id, breed, displayImage}) {      
+        console.log("Adding dog part one  ...");
         return new Promise((resolve, reject) => {
 
           const dog = {
