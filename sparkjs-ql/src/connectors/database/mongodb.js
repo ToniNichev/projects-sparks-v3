@@ -25,15 +25,12 @@ const connect = async () => {
 
 export default {
 
-  add: async (docObject, collectionName) => {
+  addArray: async (docObject, collectionName) => {
     let result;
 
     try  {
       const db = await connect();
-      if(docObject.length === 1)
-        result = await db.collection(collectionName).insertOne(docObject);
-      else
-        result = await db.collection(collectionName).insertMany(docObject);
+      result = await db.collection(collectionName).insertMany(docObject);
       return result;
     }
     catch (err) {

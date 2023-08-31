@@ -19,6 +19,6 @@ export default {
               "displayImage": 'https://some.image-2'
             }
         ];
-        mongoDB.add(dogs, 'dogs', () => {});         
+        mongoDB.addArray(dogs, 'dogs', () => {});         
     }
 }
