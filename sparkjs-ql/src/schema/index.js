@@ -5,9 +5,16 @@ import mutations from './mutations/index.js';
 
 var rootQuery = new graphql.GraphQLObjectType({
   name: 'Query',
-  fields: {...queries, ...mutations },
+  fields: {...queries },
+});
+
+var rootMutation = new graphql.GraphQLObjectType({
+  name: 'Mutation',
+  fields: {...mutations },
 });
 
 export default new graphql.GraphQLSchema({
-  query: rootQuery
+  query: rootQuery,
+  mutation: rootMutation,
 });
+

@@ -21,8 +21,9 @@ export default {
         }
       ];
 
-      const result = await mongoDB.add(dog, 'Dogs');
-      return result;
+      const result = await mongoDB.addArray(dog, 'dogs');
+      console.log(">>>>>", result);
+      return true;
     }
   }
 }
