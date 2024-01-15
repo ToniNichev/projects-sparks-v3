@@ -9,7 +9,6 @@ import schema  from './src/schema/index.js';
 import queries from './src/queries/index.js';
 dotenv.config();
 
-
 const app = express();
 
 const server = new ApolloServer({
@@ -37,5 +36,5 @@ app.use('/services/setup', async (req, res) => {
   .send('{"status": "sucess"}');  
 });
 
-app.listen(4001);
-console.log('Running a GraphQL API server at localhost:4001/graphql');
+app.listen(process.env.SERVER_PORT);
+console.log(`Running a GraphQL API server at localhost:${process.env.SERVER_PORT}/graphql`);
