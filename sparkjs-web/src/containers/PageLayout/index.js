@@ -20,8 +20,6 @@ const PageLayout = (props) => {
     // client side       
   }
 
-
-
   const pageName = PageData[url] ?  url : "/not-found";
   const page = PageData[pageName];
   const template = page?.template || "template-not-found";

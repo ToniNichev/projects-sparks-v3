@@ -1,13 +1,30 @@
 import React from 'react';
-import styles from './styles.scss';
-
-
-function Words() {
-
-  return(
-  <div className={styles.wrapper}>
-    <h1>Words</h1>
-  </div>);
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+const GET_DOG = gql`
+query 
+{
+  getDogByBreed(breed: "labrador") {
+    id
+    breed
+    displayImage
+  }
 }
-
-export default Words;
+`
+const DogCatalog = () => (
+  <Query query={GET_DOG}>
+    {({ loading, error, data }) => {
+      if (loading) return <div>Loading...</div>;
+      if (error) return <div>Error!</div>;
+      return (
+        <div>
+            <span>breed: </span>
+            <span>{data.getDogByBreed.breed}</span>
+            <br />
+            <img src={data.getDogByBreed.displayImage} />
+        </div>
+      )
+    }}
+  </Query>
+)
+export default DogCatalog;

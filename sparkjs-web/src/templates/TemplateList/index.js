@@ -7,5 +7,5 @@ export default {
   Html,
   OtherHtml,
   InternalError,
-
+  TemplateNotFound,
 }
