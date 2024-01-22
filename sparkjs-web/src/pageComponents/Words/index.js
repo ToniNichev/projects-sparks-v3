@@ -1,6 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import styles from './styles.scss';
 const GET_DOG = gql`
 query 
 {
@@ -17,7 +18,7 @@ const DogCatalog = () => (
       if (loading) return <div>Loading...</div>;
       if (error) return <div>Error!</div>;
       return (
-        <div>
+        <div className={styles.wrapper}>
             <span>breed: </span>
             <span>{data.getDogByBreed.breed}</span>
             <br />

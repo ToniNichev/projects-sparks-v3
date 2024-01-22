@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes, Switch, Link, useLocation } from 'react-router-dom';
 import PageLayout from '../../containers/PageLayout';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, createHttpLink } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { StaticRouter } from "react-router-dom/server";
@@ -11,19 +11,34 @@ import styles from './styles.scss';
 
 const context = {};
 
+
+const apolloClient = new ApolloClient({
+  ssrMode: true,
+  link: new HttpLink({
+    uri: 'http://localhost:8088/graphql',
+    headers: {
+      // cookie: req.header('Cookie'),
+    },
+  }),
+  cache: new InMemoryCache(),
+});
+
+
 const client = () => {
   const cookies = {};
   const apiData = {};
 
-  const props = {    
+  const props = {
   }
-    
+
   return (
-    <BrowserRouter>
-      <Routes>      
-        <Route path="/*" element={<PageLayout {...props} />} />        
-      </Routes>        
-    </BrowserRouter>      
+    <ApolloProvider client={apolloClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<PageLayout {...props} />} />
+        </Routes>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 }
 
@@ -32,17 +47,19 @@ const server = (props) => {
   const apiData = {};
 
   return (
-    <StaticRouter location={ props.url }  context={context}>
-      <PageLayout serverCookies={cookies} apiData={apiData} {...props} />
-    </StaticRouter>      
+    <ApolloProvider client={apolloClient}>
+      <StaticRouter location={props.url} context={context}>
+        <PageLayout serverCookies={cookies} apiData={apiData} {...props} />
+      </StaticRouter>
+    </ApolloProvider>
   );
 }
 
-export default ( { req } ) => { 
+export default ({ req }) => {
   return (
     <div className={styles.appWrapper}>
-      {typeof window == 'undefined' ? server(req) :client(req)}
-    </div>   
+      {typeof window == 'undefined' ? server(req) : client(req)}
+    </div>
   );
 }
 

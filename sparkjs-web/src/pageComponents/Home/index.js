@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from './styles.scss';;
+import styles from './styles.scss';
 const {WEATHER_API_URL} = process.env;
 
 
