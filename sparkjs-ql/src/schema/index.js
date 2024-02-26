@@ -14,7 +14,7 @@ const typeDefs = `#graphql
   type User {
     id: String,
     email: String,
-    books: [Book],
+    books(id: String!): [Book],
   }
 
   input newBook {

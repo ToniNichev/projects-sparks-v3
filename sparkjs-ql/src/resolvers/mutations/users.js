@@ -1,7 +1,7 @@
 //import mongoDB from '../connectors/database/mongodb.js';
 import usersDB from '../usersDB.js';
 
-const addUser = async (parent, args) => {
+const addUser = async (parent, args, context, info) => {
 
     const books = args.books ? args.books : [];
     usersDB.push(
@@ -18,7 +18,7 @@ const addUser = async (parent, args) => {
 
 
 const resolvers = {
-    addUser: (parent, args) => addUser(parent, args), 
+    addUser: (parent, args, context, info) => addUser(parent, args, context, info), 
 };
 
 export default resolvers;

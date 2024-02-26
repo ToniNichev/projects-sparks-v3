@@ -6,13 +6,14 @@ const getUserByEmail = async (parent, args) => {
     return userDB[0];
 }
 
-const getAllUsers = () => {
+const getAllUsers = (parent, args, third) => {
+    console.log("!!!!!>>>", parent)
     return userDB;
 }
 
 
 const resolvers = {
-    getAllUsers: getAllUsers,
+    getAllUsers: (parent, args, third) => getAllUsers(parent, args, third),
     getUserByEmail: (parent, args) => getUserByEmail(parent, args),
 };
 
