@@ -1,20 +1,41 @@
-import  graphql from 'graphql';
-import queries from './queries/index.js';
-import mutations from './mutations/index.js';
+const typeDefs = `#graphql
+
+  type Dog {
+    id: String,
+    breed: String,
+    displayImage: String,
+  }
+
+  type Book {
+    id: String,
+    name: String,
+  }
+
+  type User {
+    id: String,
+    email: String,
+    books: [Book],
+  }
+
+  input newBook {
+    id: String,
+    name: String,
+  }
 
 
-var rootQuery = new graphql.GraphQLObjectType({
-  name: 'Query',
-  fields: {...queries },
-});
 
-var rootMutation = new graphql.GraphQLObjectType({
-  name: 'Mutation',
-  fields: {...mutations },
-});
+  type Query {
+    getAllDogs: [Dog],
+    getDogByBreed(breed: String!): Dog,
+    getDogById(id: String!): Dog,
 
-export default new graphql.GraphQLSchema({
-  query: rootQuery,
-  mutation: rootMutation,
-});
+    getAllUsers: [User],
+    getUserByEmail(email: String!): User,
+  }
 
+  type Mutation {
+    addUser(id: String!, email: String!, books: [newBook] ): [User]!
+  }
+`
+
+export default typeDefs;

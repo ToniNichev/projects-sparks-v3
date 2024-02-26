@@ -16,7 +16,7 @@
     "mongodb": "^5.8.1"
   },
   "scripts": {
-    "start-dev": "nodemon babel-node index.js"
+    "start-dev": "nodemon babel-node server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
