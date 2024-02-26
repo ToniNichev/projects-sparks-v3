@@ -7,7 +7,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { StaticRouter } from "react-router-dom/server";
 import styles from './styles.scss';
-
+const {GRAPHQL_URL} = process.env;
 
 const context = {};
 
@@ -15,7 +15,7 @@ const context = {};
 const apolloClient = new ApolloClient({
   ssrMode: true,
   link: new HttpLink({
-    uri: 'http://localhost:8088/graphql',
+    uri: GRAPHQL_URL + '/graphql',
     headers: {
       // cookie: req.header('Cookie'),
     },

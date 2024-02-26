@@ -22,7 +22,21 @@ const Dogs = {
       const result = await mongoDB.find({}, 'dogs');
       return result;
     }
-  }    
+  },
+  getDogById: {
+    type: AllTypes.Dog,
+    args: {
+      id: { type: graphql.GraphQLString }
+    },
+    resolve: async (_, {id}) => {
+      const result = {
+        id: 5,
+        breed: "german shepard",
+        displayImage: "test 123"
+      }
+      return result;
+    }        
+  },   
 }
 
 

@@ -2,6 +2,8 @@ const getEnvironmentConstants = require('../getEnvironmentConstants');
 const webpack = require('webpack');
 // const Loadable  = require('react-loadable/webpack');
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/dist/`;
 
@@ -9,22 +11,17 @@ const publicPath = `${process.env.APP_HOST}:${process.env.ASSETS_SERVER_PORT}/di
 
 console.log(`Assets will be served from: ${process.env.APP_HOST} ${process.env.ASSETS_SERVER_PORT}`);
 
-module.exports = {
-  mode: 'production',
-  
-  // devtool: 'source-map',
-
+var config = {
+  mode: 'development',
+  devtool: 'eval-source-map',
   entry: [
+    '@babel/polyfill',    
     './src/index.js',
-  ], 
-
+  ],
   output: {
     filename: '[name]-bundle.js',
-    sourceMapFilename: 'source-maps/[name].js.map',
-    //publicPath,
     publicPath: '/dist/',
   },  
-
   module: {
     rules: [
       {
@@ -43,28 +40,28 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: {
-                localIdentName: '[folder]-[local]--[hash:base64:5]',
-              },
-              importLoaders: 2,              
+              modules: true,
+              importLoaders: 2,
+              localIdentName: '[folder]-[local]',
               sourceMap: true
             }
           },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: true              
+              plugins: () => [require('autoprefixer')()],
+              sourceMap: true
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
-            },             
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
           }
         ],
       },
-
       // images
       {
         test: /\.(png|jp(e*)g|svg)$/,  
@@ -76,18 +73,34 @@ module.exports = {
             } 
         }]
       },
-      // Fonts loader
+      //File loader used to load fonts
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'asset/resource',
-        dependency: { not: ['url'] },
+        use: ['file-loader']
       }                    
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css", // Optional: Output filename pattern
+      chunkFilename: "[id].css", // Optional: Chunk filename pattern
+    }),    
+    new OptimizeCSSAssetsPlugin({}),  
     new webpack.DefinePlugin({ 'process.env' : getEnvironmentConstants() } ),  
-
     // hot reload
     new webpack.HotModuleReplacementPlugin() 
   ]
 };
+
+config.module.rules[1].use[0] = MiniCssExtractPlugin.loader;
+config.plugins = [ ... [new MiniCssExtractPlugin({
+        // these are optional
+        filename: "[name].css",
+        chunkFilename: "[id].css"
+    })], 
+    new OptimizeCSSAssetsPlugin({}),  
+    ... config.plugins
+];
+
+
+module.exports = config;

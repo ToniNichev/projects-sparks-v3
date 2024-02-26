@@ -133,3 +133,5 @@ dist
 # Build directories
 sparkjs-web/static-assets/
 sparkjs-web/server-build/
+server-build/
+./sparkjs-web/server-build/
