@@ -1,34 +1,21 @@
-import dogsResolvers from './queries/dogs.js';
-import usersResolvers from './queries/users.js';
+import dogsQueries from './queries/dogs.js';
+import usersQueries from './queries/users/queries.js';
 
 import usersMutations from './mutations/users.js';
 
+import usersFields from './queries/users/fields.js';
 
 
 const resolvers = {
   Query: {
-    ...dogsResolvers,
-    ...usersResolvers,
+    ...dogsQueries,
+    ...usersQueries,
   },
   Mutation: {
     ...usersMutations,
   },
 
-  User: {
-    books: (parent, args) => {
-      console.log(">>>>>>>>", args)
-      return [
-        {
-          id: 123,
-          name: 'moby-dik second edition',
-        },
-        {
-          id: 3,
-          name: 'Stand By Me',
-        }
-      ]
-    }
-  }
+  ...usersFields,
 }
 
 export default resolvers;
