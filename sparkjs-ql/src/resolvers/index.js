@@ -12,7 +12,23 @@ const resolvers = {
   },
   Mutation: {
     ...usersMutations,
-  }  
+  },
+
+  User: {
+    books: (parent, args) => {
+      console.log(">>>>>>>>", args)
+      return [
+        {
+          id: 123,
+          name: 'moby-dik second edition',
+        },
+        {
+          id: 3,
+          name: 'Stand By Me',
+        }
+      ]
+    }
+  }
 }
 
 export default resolvers;
